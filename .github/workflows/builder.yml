@@ -15,6 +15,7 @@ on:
 jobs:
   userge:
     runs-on: ubuntu-latest
+    if: "! contains(github.event.head_commit.message, '[skip userge]')"
     steps:
     - uses: actions/checkout@v2.3.4
     - uses: docker/login-action@v1.9.0
@@ -22,7 +23,6 @@ jobs:
         username: rzlamrr
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build & Push
-      if: "! contains(github.event.head_commit.message, '[skip userge]')"
       run: |
         docker build . --rm --force-rm --compress --no-cache=true --pull \
         --file Userge --tag rzlamrr/userge:latest
@@ -30,6 +30,7 @@ jobs:
 
   megasdk:
     runs-on: ubuntu-latest
+    if: "! contains(github.event.head_commit.message, '[skip megasdk]')"
     steps:
     - uses: actions/checkout@v2.3.4
     - uses: docker/login-action@v1.9.0
@@ -37,7 +38,6 @@ jobs:
         username: rzlamrr
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build & Push
-      if: "! contains(github.event.head_commit.message, '[skip megasdk]')"
       run: |
         docker build . --rm --force-rm --compress --no-cache=true --pull \
         --file Megasdk --tag rzlamrr/megasdk:latest
@@ -45,6 +45,7 @@ jobs:
 
   music:
     runs-on: ubuntu-latest
+    if: "! contains(github.event.head_commit.message, '[skip music]')"
     steps:
     - uses: actions/checkout@v2.3.4
     - uses: docker/login-action@v1.9.0
@@ -52,7 +53,6 @@ jobs:
         username: rzlamrr
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build & Push
-      if: "! contains(github.event.head_commit.message, '[skip music]')"
       run: |
         docker build . --rm --force-rm --compress --no-cache=true --pull \
         --file Daisyxmusic --tag rzlamrr/music:latest
