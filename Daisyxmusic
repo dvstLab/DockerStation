@@ -1,0 +1,15 @@
+FROM python:3.9
+
+RUN apt update -qqy && apt install git curl ffmpeg -qqy --no-install-recommends
+RUN pip3 install -U pip
+
+RUN curl -sL https://deb.nodesource.com/setup_15.x | bash -
+RUN apt update -qqy && apt-get install -qqy nodejs --no-install-recommends \
+    && apt-get -qqy clean && apt-get -qqy autoremove \
+    && rm -rf /var/lib/apt/lists \
+    && rm -rf /var/cache/apt/archives
+RUN npm i -g npm
+
+RUN curl -sLO https://raw.githubusercontent.com/TeamDaisyX/DaisyXMusic/master/requirements.txt \
+    && pip install -r requirements.txt \
+    && rm requirements.txt
