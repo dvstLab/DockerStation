@@ -24,6 +24,6 @@ RUN apt-get -y clean && apt-get -y autoremove \
     && rm -rf /var/cache/apt/archives
 
 RUN curl -sLO https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements.txt \
-    && curl -sLO https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements-cli.txt
+    && curl -sLO https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements-cli.txt \
     && pip install -r requirements.txt && pip install -r requirements-cli.txt \
     && rm requirements.txt requirements-cli.txt
