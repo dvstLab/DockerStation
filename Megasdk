@@ -10,6 +10,18 @@ RUN apt-get -qq update \
         libsodium-dev libnautilus-extension-dev \
         libssl-dev libfreeimage-dev swig curl
 
+RUN apt-get -qq install -y --no-install-recommends software-properties-common \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-add-repository non-free \
+    && apt-get -qq update \
+    && apt-get -qq install -y p7zip-full mediainfo p7zip-rar aria2 curl pv jq ffmpeg locales python3-lxml \
+    && apt-get purge -y software-properties-common
+
+RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+
 ENV MEGA_SDK_VERSION '3.8.8'
 
 RUN git clone https://github.com/meganz/sdk.git sdk && cd sdk \
@@ -27,3 +39,7 @@ RUN curl -sLO https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master
     && curl -sLO https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/requirements-cli.txt \
     && pip install -r requirements.txt && pip install -r requirements-cli.txt \
     && rm requirements.txt requirements-cli.txt
+
+RUN curl -sLo /usr/local/bin/extract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/extract \
+    && curl -sLo /usr/local/bin/pextract https://raw.githubusercontent.com/breakdowns/slam-mirrorbot/master/pextract \
+    && chmod +x /usr/local/bin/extract /usr/local/bin/pextract
