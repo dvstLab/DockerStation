@@ -24,7 +24,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build & Push
       run: |
-        docker build . --rm --force-rm --compress --no-cache=true --pull \
+        docker build . --compress --pull \
         --file Userge --tag rzlamrr/userge:latest
         docker push rzlamrr/userge:latest
 
@@ -39,7 +39,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build & Push
       run: |
-        docker build . --rm --force-rm --compress --no-cache=true --pull \
+        docker build . --compress --pull \
         --file Megasdk --tag rzlamrr/megasdk:latest
         docker push rzlamrr/megasdk:latest
 
@@ -54,6 +54,6 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build & Push
       run: |
-        docker build . --rm --force-rm --compress --no-cache=true --pull \
+        docker build . --compress --pull \
         --file Daisyxmusic --tag rzlamrr/music:latest
         docker push rzlamrr/music:latest
